@@ -1,5 +1,4 @@
-package Log;
-use strict;
+package Log; use strict;
 use warnings;
 
 use DateTime;
@@ -42,6 +41,19 @@ sub time {
     my $dt = DateTime->from_epoch(epoch => $self->{epoch}, time_zone => 'UTC'); 
     # GMT == UTC
     return $dt->ymd('-')."T".$dt->hms(':');
+}
+
+sub to_hash {
+    my $self = shift;
+    my %h;
+    $h{'time'} = $self->time if $self->{epoch};
+    $h{'method'} = $self->method if $self->{req};
+    $h{'status'} = $self->{status} if $self->{status};
+    $h{'user'} = $self->{user} if $self->{user};
+    $h{'referer'} = $self->{referer} if $self->{referer};
+    $h{'size'} = $self->{size} if $self->{size};
+    $h{'uri'} = $self->uri if $self->{size} && $self->{referer} && $self->{host};
+    return \%h;
 }
 
 1;
