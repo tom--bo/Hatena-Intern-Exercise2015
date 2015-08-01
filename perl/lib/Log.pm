@@ -43,6 +43,12 @@ sub time {
     return $dt->ymd('-')."T".$dt->hms(':');
 }
 
+sub timeToMin {
+    my $self = shift;
+    my $dt = DateTime->from_epoch(epoch => $self->{epoch}, time_zone => 'UTC'); 
+    return $dt->strftime('%Y-%m-%d %H:%M');
+}
+
 sub to_hash {
     my $self = shift;
     my %h;
