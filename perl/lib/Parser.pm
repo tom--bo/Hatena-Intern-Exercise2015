@@ -16,7 +16,7 @@ sub parse {
     if ( !$File ) {
         die "miss!: $!";
     }
-    my $ret = [];
+    my @ret;
     while(<LTSV>){
         chomp;
         my @tmp = split(/\t+/, $_);
@@ -25,9 +25,9 @@ sub parse {
             $val =~ /([a-z]*):(.*)/;
             $obj{$1} = $2 unless $2 eq '-';
         }
-        push($ret, Log->new(%obj));
+        push(@ret, Log->new(%obj));
     }
-    return $ret;
+    return \@ret;
 }
 
 1;

@@ -56,4 +56,10 @@ sub to_hash {
     return \%h;
 }
 
+sub status {
+    my $self = shift;
+    my $ret = $self->{status};
+    return $ret;
+}
+
 1;
