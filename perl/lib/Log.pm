@@ -62,4 +62,10 @@ sub status {
     return $ret;
 }
 
+sub user {
+    my $self = shift;
+    my $ret = $self->{user};
+    return $ret;
+}
+
 1;
